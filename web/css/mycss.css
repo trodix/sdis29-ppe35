@@ -1,0 +1,138 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 21 oct. 2017, 17:58:34
+    Author     : Dominique_2
+*/
+
+#login {
+    background-color: #EDEDED;    
+    color: #333333;   
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+}
+header {
+    background-color: #333333;
+    color: #EDEDED;    
+}
+#identite {   
+    color: #EDEDED;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+main {
+    background-color: #EDEDED;
+    width: 80%;    
+    margin:auto;
+    border-radius: 5px;
+}
+ #contenuAffiche {
+    display: flex;
+    justify-content:center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+ }       
+#page {
+    background-color: #333333;
+    font-family: sans-serif;
+    
+}
+#authentif {
+     width : 40%;
+}
+fieldset {
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid #DB0005;
+}
+nav {
+    background-color: #DB0005;
+    border-radius: 5px;
+    margin-top: -3%;
+    padding-bottom: 3px;
+    display: flex;
+    justify-content:space-around;  
+  
+}
+nav a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #EDEDED;
+}
+a:hover {
+    color: #D2D2D2;
+    text-decoration: none;
+}
+footer {
+    margin-top: 10px;
+    background-color: #EDEDED;
+    text-align: center;
+    font-size: smaller;
+    padding: 10px;
+    border-bottom: 3px solid #DB0005;
+}
+footer p {
+    margin: 0px;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    margin-bottom : 1px;
+}
+li {
+    width : 200px;
+    border-right : 2px solid #EDEDED;
+    border-left: 2px solid #EDEDED;
+    text-align: center;
+    padding : 5px;
+}
+.submit {
+    text-align: center;
+}
+.alert {
+    margin-top: 5px;
+}
+#caserne {
+    margin-left:20%;
+    display: flex;
+    align-items: center;
+    
+}
+#caserne p {
+    padding: 2px;
+}
+#login a {
+    color: #333333;     
+}
+.glyphicon-map-marker {
+    font-size: 200%;
+}
+.row {
+    padding : 10px;
+}
+#action {
+    text-align:right;
+}
+#action .glyphicon {
+    padding: 5px;
+    font-size: large;
+}
+legend {
+    margin-bottom:0px;
+}
+#choixPompier {
+    border-bottom: 1px solid #DB0005;
+    margin-bottom: 5px;
+}
+.bgWhite {
+    background-color: white;
+}
+#taObs {
+    height: 30px;
+}

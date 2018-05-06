@@ -1,0 +1,92 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<form action="pompier" method="POST" class="formPompier" >
+    <div class="row">        
+        <div class="col-md-6">
+          <label for="ztNom">Nom</label>
+          <input type="text" class="form-control" id="ztNom" name="ztNom" 
+                 placeholder="Nom" value="<% out.print(lePompierAf.getpNom()); %>" required>
+        </div>
+        <div class="col-md-6">
+          <label for="ztPrenom">Prenom</label>
+          <input type="text" class="form-control" id="ztPrenom" name="ztPrenom" 
+                 placeholder="Prénom" value="<% out.print(lePompierAf.getpPrenom()); %>" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+          <label for="ztRue">Adresse</label>
+          <input type="text" class="form-control" id="ztRue" name="ztAdresse" 
+                 placeholder="Adresse" value="<% out.print(lePompierAf.getpAdresse()); %>" required>
+        </div>
+        <div class="col-md-3">
+          <label for="ztCP">Code postal</label>
+          <input type="text" class="form-control" id="ztCP" name="ztCP" 
+                 placeholder="Code postal" value="<% out.print(lePompierAf.getpCp()); %>" required>          
+        </div>
+        <div class="col-md-3">
+          <label for="ztVille">Ville</label>
+          <input type="text" class="form-control" id="ztVille" name = "ztVille" 
+                 placeholder="Ville" value="<% out.print(lePompierAf.getpVille()); %>" required>
+        </div>
+    </div>
+    <div class="row">  
+        <div class="col-md-9">
+            <label for="ztMail">Adresse électronique</label>
+            <input type="email" class="form-control" id="ztMail" name="ztMail" 
+                   placeholder="Email" value="<% out.print(lePompierAf.getpMail()); %>" required>            
+        </div>
+        <div class="col-md-3">
+            <label for="ztLogin">Login</label>
+            <input type="text" class="form-control" id="ztLogin" name="ztLogin" 
+                   placeholder="Login" value="<% out.print(lePompierAf.getpLogin()); %>" required>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <div class="row"> 
+                <div class="col-md-12">
+                    <label for="ztBip">No bip</label>
+                    <input type="text" class="form-control" id="ztBip" name="ztBip" 
+                   placeholder="No bip" value="<% out.print(lePompierAf.getpBip()); %>" required>
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-md-12">
+                    <label for="ldrGrade">Grade</label>                    
+                    <select class="form-control <% out.print(chef); %>" id="ldrGrade" name="ldrGrade">
+                        <% for (Parametre unGrade:lesGrades) {
+                            String selected = lePompierAf.getpGrade()==unGrade.getCode()?"selected":"";
+                            out.print("<option "+selected+" value='"+unGrade.getCode()+"'>"+unGrade.getValeur()+"</option>");
+                        }
+                        %>
+                        
+                    </select>
+                </div>
+            </div>            
+            <div class="row refPhoto">
+                 <div class="col-md-12">
+                    <label for="photo" class="custom-file">Changer la photo</label>
+                    <input type="file" class="form-control" id="photo" name="photo" accept=".png, .jpg, .jpeg" />     
+                 </div>
+            </div>           
+        </div>
+        <div class="col-md-5">
+            <img src="images/pompier.png" alt="portrait">
+        </div>
+    </div>
+    <div class="row"> 
+        <div class="col-md-12">
+            <label for="taObs">Observations</label>
+            <input type="text" class="form-control" id="taObs" name="taObs" 
+                   value="<% out.print(lePompierAf.getpCommentaire());%>" />                
+        </div>
+    </div> 
+    <input type="hidden" name="zhAction" class="zhAction" value="<% out.print(action);%>" />
+    <input type="hidden" name="zhIdP" id="zhIdP" value="<% out.print(lePompierAf.getpId());%>" />
+    <div class="submit">
+        <input class="btn btn-danger" type="submit" value="Valider" name="bt<% out.print(leForm); %>"/>
+    </div>
+</form>
+

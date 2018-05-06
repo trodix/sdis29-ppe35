@@ -1,0 +1,31 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<form action="pompier?page=choixPompier" method="POST" id="choixPompier">
+    <div class="row"> 
+        <div class="col-md-9">
+            <label for="ldrPompier">Choix du pompier</label>
+            <select class="form-control" id="ldrPompier" name="ldrPompier">
+                <optgroup label="les pompiers volontaires">
+                <%  int indice = 0;
+                    for(Pompier unPompier : lesPompiers) { 
+                        String selected = lePompierAf.getpId()==unPompier.getpId()?"selected":""; %>
+                        <option <% out.print(selected); %> value=<% out.println(indice); %> >
+                            <% out.println(unPompier.getpNom()+" "+unPompier.getpPrenom()); %>
+                        </option>
+                    <% indice++;
+                } %>
+            </select>
+        </div>        
+        <div class="col-md-3">
+            <input class="btn btn-danger" type="submit" value="Afficher" />
+        </div>    
+    </div>            
+</form>
+<div id="action">   
+    <span class="glyphicon glyphicon-eye-open" title="Voir" onclick="voirPompier('#lesPompiers');"></span>
+    <span class="glyphicon glyphicon-pencil" title="Modifier" onclick="modifierPompier('#lesPompiers');"></span>
+    <span class="glyphicon glyphicon-plus" title="Ajouter" onclick="ajouterPompier();"></span>
+</div>  
+        
+   
+    

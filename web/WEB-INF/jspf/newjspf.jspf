@@ -1,0 +1,49 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="com.sdis29a.beans.Pompier"%>
+<%@page import="com.sdis29a.beans.Caserne"%>
+<%@ page pageEncoding="UTF-8" %>
+    <div id="page">
+        <div id='login'>
+            <%
+                boolean authentif = false;
+                Pompier lePompier = null;
+                Caserne laCaserne = null;
+                int codeStatut = 0;
+                HttpSession maSession= request.getSession();
+                if (maSession.getAttribute("lePompier") != null) {
+                    lePompier = (Pompier) maSession.getAttribute("lePompier");
+                    laCaserne = lePompier.getLaCaserne();
+                    authentif = true;  
+                    codeStatut = lePompier.getLeStatut().getCode();
+                    System.out.println("Statut: "+lePompier.getLeStatut());
+                    out.println("<h3>Bienvenue "+lePompier.getpPrenom()+" "+
+                                                lePompier.getpNom()+" ("+
+                                                lePompier.getLeStatut().getValeur()+")</h3>");
+                    out.println("<h3><a href=login><span class='glyphicon glyphicon-off' title='Déconnexion'></span></a></h3>");
+                } else {
+                    out.println("<h3>Bienvenue</h3>");
+                }
+            %>
+        </div> 
+        <main>
+            <header>
+                <div id="identite">
+                    <img src="images/logo-sdis.png" alt='logo' />
+                    <h4>Service Départemental d'Incendie et de Secours du Finistère</h4>
+                    <div id="caserne" title="Adresse caserne">                        
+                        <%  if(authentif) {
+                                out.println("<p><span class='glyphicon glyphicon-map-marker'></span><p>");
+                                out.println("<p>"+laCaserne.getcNom()+"<br />"+
+                                        laCaserne.getcAdresse()+"<br />"+
+                                        laCaserne.getcTel()+"</p>");
+                            }
+                        %>
+                    </div>
+                </div>
+                <nav>
+                    <ul>                        
+                        <li><a href="#">Mentions légales</a></li> 
+                        <li><a href="#">Gestion des paramètres</a></li> 
+                    </ul>                   
+                </nav>            
+            </header>

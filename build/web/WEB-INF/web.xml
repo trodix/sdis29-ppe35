@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AuthentifFilter</filter-name>
+        <filter-class>com.sdis29a.filter.AuthentifFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthentifFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <!-- Filtre pour encodage UTF-8, penser à redémarrer Tomcat aprés ajout -->
+    <filter>
+        <filter-name>Set Character Encoding</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ignore</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Set Character Encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <servlet>
+        <servlet-name>AuthentifServ</servlet-name>
+        <servlet-class>com.sdis29a.servlets.AuthentifServ</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PompierServ</servlet-name>
+        <servlet-class>com.sdis29a.servlets.PompierServ</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>AuthentifServ</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PompierServ</servlet-name>
+        <url-pattern>/pompier</url-pattern>
+    </servlet-mapping>
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>
