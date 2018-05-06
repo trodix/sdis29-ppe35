@@ -291,6 +291,14 @@ alter table pompier add foreign key (pCis) references caserne(cId);
 alter table parametre add foreign key (pType) references typeParametre(tpId);
 commit;
 
+-- ----------------------------------------------------------------------------------------------
+-- Ajout mission 1
+ALTER TABLE `sdis29`.`pompier` 
+ADD COLUMN `pUrlPhoto` VARCHAR(255) NULL DEFAULT NULL AFTER `pCommentaire`,
+ADD COLUMN `pEmpAdresse` VARCHAR(45) NULL DEFAULT NULL AFTER `pUrlPhoto`,
+ADD COLUMN `pEmpCp` VARCHAR(5) NULL DEFAULT NULL AFTER `pEmpAdresse`,
+ADD COLUMN `pEmpVille` VARCHAR(25) NULL DEFAULT NULL AFTER `pEmpCp`;
+
 -- ------------------------------------------------------------------------------------------------
 -- user
 CREATE USER 'adminBDsdis'@'localhost' IDENTIFIED BY 'mdpBDsdis';
