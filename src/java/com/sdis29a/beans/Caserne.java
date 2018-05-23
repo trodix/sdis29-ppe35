@@ -5,6 +5,8 @@
  */
 package com.sdis29a.beans;
 
+import java.util.Objects;
+
 /**
  *
  * @author Dominique_2
@@ -77,6 +79,45 @@ public class Caserne {
         this.cAdresse = cAdresse;
         this.cTel = cTel;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 17 * hash + this.cId;
+        hash = 17 * hash + Objects.hashCode(this.cNom);
+        hash = 17 * hash + Objects.hashCode(this.cAdresse);
+        hash = 17 * hash + Objects.hashCode(this.cTel);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Caserne other = (Caserne) obj;
+        if (this.cId != other.cId) {
+            return false;
+        }
+        if (!Objects.equals(this.cNom, other.cNom)) {
+            return false;
+        }
+        if (!Objects.equals(this.cAdresse, other.cAdresse)) {
+            return false;
+        }
+        if (!Objects.equals(this.cTel, other.cTel)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
     
 }

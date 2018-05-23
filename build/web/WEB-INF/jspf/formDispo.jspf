@@ -1,0 +1,74 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="com.sdis29a.beans.Ventil"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.sdis29a.util.TrmtDate"%>
+<%@page import="java.util.Calendar"%>
+<%@ page pageEncoding="UTF-8" %>
+<form method="POST" action ="pompier?page=lesGardes">
+                      <table>
+                        <thead>
+                            <tr>
+                                <th class="centrer" rowspan="2">No</th>                               
+                                <th class="centrer" rowspan="2">Nom Prénom</th> 
+                                <%
+                                    // Récupération du tableau des dates, et affichage des entêtes de colonnes
+                                    Calendar[] lesDates = (Calendar[]) maSession.getAttribute("lesDates");
+                                    for (Calendar c:lesDates) {                                        
+                                        out.println("<th class='centrer' colspan='4'>" + TrmtDate.getDateAAfficher(c) + "</th>");                                        
+                                    }
+                                    out.println("<tr>");                                    
+                                    for (int i=0; i<lesDates.length; i++) {
+                                        for (int j=0; j<lesPeriodes.size(); j++) {
+                                            out.println("<th class='centrer smallCel'>"+lesPeriodes.get(j).getCode()+"</th>");
+                                        }
+                                    }
+                                    out.println("</tr>");
+                                %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                            
+                            String[] lesCouleurs = {"rouge","vert","orange"}; 
+                            String[] lesActivites = {"Indisponible", "Disponible", "Au travail"};
+                            // Parcours de la collection lesVentilations
+                            int idSal = 0;
+                            int affect=0;
+                            boolean deGarde;
+                            int indiceCel=0;
+                            String disabled;
+                            String checked;
+                            for (Ventil uneVentil : lesVentil) {
+                                if (idSal != uneVentil.getPompier().getLaCaserne().getcId()*100+uneVentil.getPompier().getpId()) {
+                                    if (idSal > 0) {
+                                        out.println("</tr>");  // Fin de traitement de la ligne du salarié
+                                    }
+                                    idSal = uneVentil.getPompier().getLaCaserne().getcId()*100+uneVentil.getPompier().getpId();                             
+                                    out.println("<tr><td class='centrer'>" + idSal + "</td>");
+                                    out.println("<td>" + uneVentil.getPompier().getpNom()+ " " + uneVentil.getPompier().getpPrenom() + "</td>");  
+                                }
+                                String zoneInput ="";  
+                                affect = uneVentil.getActivite();
+                                deGarde = uneVentil.isIsDeGarde();
+                                String modifDispo = deGarde?"":" ztCodeV ";  // Permet d'autoriser la modif des dispos ou non
+                                disabled = (affect == 0)||(codeStatut!=2)?" disabled ":"";
+                                checked = deGarde?" checked ":"";
+                                zoneInput = "<input type='text' readonly='readonly' class='centrer " + modifDispo + lesCouleurs[affect] + "' name='tabVentil' value=" + affect + " />";
+                                zoneInput+= "<input name='cbGarde' value="+indiceCel++ + disabled + checked + " type='checkbox' />";
+                                out.println("<td class='smallcel'>" + zoneInput + "</td>");
+                            }
+                            out.println("</tr>");
+                            %>
+                        </tbody>
+                       </table> 
+                       <div class="submit">
+                        <input type="submit" value="Valider" id="btValider" class="btn btn-danger" name="btGardes"/> 
+                       </div>
+                    </form>
+                    <p>
+                        <% for (int i=0; i<lesActivites.length; i++) {
+                            out.print("<span class='legende "+lesCouleurs[i]+"'>"+lesActivites[i]+"</span>");                            
+                        }
+                            out.print("<span class='legend'> <input type = 'checkbox' checked disabled /> De garde</span>");
+                        %>  
+                    </p>

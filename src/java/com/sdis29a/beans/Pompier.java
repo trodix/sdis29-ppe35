@@ -54,24 +54,19 @@ public class Pompier {
         this.pCommentaire = pCommentaire;
     }
 
+    public Pompier(Caserne laCaserne, int pId, String pNom, String pPrenom) {
+        this.laCaserne = laCaserne;
+        this.pId = pId;
+        this.pNom = pNom;
+        this.pPrenom = pPrenom;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.laCaserne);
-        hash = 41 * hash + this.pId;
-        hash = 41 * hash + Objects.hashCode(this.pNom);
-        hash = 41 * hash + Objects.hashCode(this.pPrenom);
-        hash = 41 * hash + Objects.hashCode(this.leStatut);
-        hash = 41 * hash + Objects.hashCode(this.leType);
-        hash = 41 * hash + Objects.hashCode(this.pMail);
-        hash = 41 * hash + Objects.hashCode(this.pLogin);
-        hash = 41 * hash + Objects.hashCode(this.pMdp);
-        hash = 41 * hash + Objects.hashCode(this.pAdresse);
-        hash = 41 * hash + Objects.hashCode(this.pCp);
-        hash = 41 * hash + Objects.hashCode(this.pVille);
-        hash = 41 * hash + Objects.hashCode(this.pBip);
-        hash = 41 * hash + this.pGrade;
-        hash = 41 * hash + Objects.hashCode(this.pCommentaire);
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.laCaserne);
+        hash = 37 * hash + this.pId;
+        hash = 37 * hash + Objects.hashCode(this.pPrenom);
         return hash;
     }
 
@@ -90,50 +85,19 @@ public class Pompier {
         if (this.pId != other.pId) {
             return false;
         }
-        if (this.pGrade != other.pGrade) {
-            return false;
-        }
         if (!Objects.equals(this.pNom, other.pNom)) {
             return false;
         }
         if (!Objects.equals(this.pPrenom, other.pPrenom)) {
             return false;
         }
-        if (!Objects.equals(this.pMail, other.pMail)) {
-            return false;
-        }
-        if (!Objects.equals(this.pLogin, other.pLogin)) {
-            return false;
-        }
-        if (!Objects.equals(this.pMdp, other.pMdp)) {
-            return false;
-        }
-        if (!Objects.equals(this.pAdresse, other.pAdresse)) {
-            return false;
-        }
-        if (!Objects.equals(this.pCp, other.pCp)) {
-            return false;
-        }
-        if (!Objects.equals(this.pVille, other.pVille)) {
-            return false;
-        }
-        if (!Objects.equals(this.pBip, other.pBip)) {
-            return false;
-        }
-        if (!Objects.equals(this.pCommentaire, other.pCommentaire)) {
-            return false;
-        }
         if (!Objects.equals(this.laCaserne, other.laCaserne)) {
-            return false;
-        }
-        if (!Objects.equals(this.leStatut, other.leStatut)) {
-            return false;
-        }
-        if (!Objects.equals(this.leType, other.leType)) {
             return false;
         }
         return true;
     }
+   
+    
 
     
   
