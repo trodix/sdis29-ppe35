@@ -38,6 +38,8 @@ public class AuthentifForms {
             ParamMySQL paramMySQL = new ParamMySQL();
             ArrayList <Parametre> lesGrades = paramMySQL.readType("grade");
             maSession.setAttribute("lesGrades", lesGrades);
+            ArrayList <Parametre> lesPeriodes = paramMySQL.readType("tranche");
+            maSession.setAttribute("lesPeriodes", lesPeriodes);
         }
         System.out.println("Trouve: " + trouve);
         return trouve;

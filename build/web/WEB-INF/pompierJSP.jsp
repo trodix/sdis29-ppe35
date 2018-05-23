@@ -20,10 +20,11 @@
     </head>
     <body>        
             <%@include file= "jspf/newjspf.jspf" %>
-            <%  ArrayList <Parametre> lesGrades = (ArrayList <Parametre>) maSession.getAttribute("lesGrades");    
+            <%  ArrayList <Parametre> lesGrades = (ArrayList <Parametre>) maSession.getAttribute("lesGrades");
+                ArrayList <Parametre> lesPeriodes = (ArrayList <Parametre>) maSession.getAttribute("lesPeriodes");              
                 String chef=(codeStatut==2)?"chef":"";%>        
                 <div id="contenu">
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs"> 
                         <%
                             // Déterminer l'onglet actif en fonction de l'attribut page
                             String monProfilActif = "";
@@ -54,20 +55,20 @@
                         <%
                             switch(codeStatut) {
                                 case 1 : %>
-                                    <li class="<% out.print(lesDispoActif); %>"><a href="#lesDispo" data-toggle="tab">Mes disponibilités</a></li>
-                                    <li><a href="#lesGardes" data-toggle="tab">Mes Gardes</a></li>
+                                    <!--<li class="<% //out.print(lesDispoActif); %>"><a href="#lesDispo" data-toggle="tab">Mes disponibilités</a></li>  -->                                 
                                     <%break; 
                                 case 2 : 
                                     String urlLesPompiers = maSession.getAttribute("lesPompiers")!=null ? "href='#lesPompiers' data-toggle='tab'" : "href='pompier?page=lesPompiers'"; %>  
                                     <li class="<% out.print(lesPompiersActif); %>"><a <% out.print(urlLesPompiers); %>>Les pompiers</a></li> 
                                     <!--<li class="<% //out.print(lesPompiersActif); %>"><a href="pompier?page=lesPompiers">Les pompiers</a></li> -->
-                                    <li class="<% out.print(lesDispoActif); %>"><a href="#lesDispo" data-toggle="tab">Les disponibilités</a></li>
-                                    <li class="<% out.print(lesGardesActif); %>"><a href="#lesGardes" data-toggle="tab">Les Gardes</a></li>
+                                    <!--<li class="<% //out.print(lesDispoActif); %>"><a href="#lesDispo" data-toggle="tab">Les disponibilités</a></li> -->                                   
                                 <% break;
                                 default :
                                     break;
                             }
                         %>
+                        <% String urlLesGardes = maSession.getAttribute("lesVentilInit")!=null ? "href='#lesGardes' data-toggle='tab'" : "href='pompier?page=lesGardes'"; %>
+                        <li class="<% out.print(lesGardesActif); %>"><a <% out.print(urlLesGardes); %> >Les Gardes</a></li>
                     </ul>
                     <!--  Contenu des onglets -->
                     <div id="contenuAffiche" class="tab-content">
@@ -122,6 +123,15 @@
                         <div class="tab-pane <% out.print(lesGardesActif); %>" id="lesGardes">
                             <fieldset>
                                 <legend>Les gardes</legend>
+                                <% // Récupération de la collection des ventilations
+                                    if (maSession.getAttribute("lesVentilInit")!=null) {     
+                                        ArrayList<Ventil> lesVentil = (ArrayList<Ventil>) maSession.getAttribute("lesVentilInit");
+                                        /*if (maSession.getAttribute("lesPompiers")!=null) { 
+                                            ArrayList<Pompier> lesPompiers =(ArrayList<Pompier>)maSession.getAttribute("lesPompiers"); }   */                                    
+                                %>        
+                                         <%@include file= "jspf/formDispo.jspf" %>
+                                <% } %>                           
+                                
                             </fieldset>
                         </div>
                     </div>                      
@@ -134,7 +144,7 @@
         <script>
             $(".formPompier").ready(voirPompier("#monProfil"));
             $("#choixPompier").ready(voirPompier("#lesPompiers"));
-            function voirPompier(onglet) {  
+            function voirPompier(onglet) {                  
                 if ($("#lesPompiers .zhAction").val()==2 & onglet == "#lesPompiers") {
                     $("#choixPompier").submit();
                 }
@@ -181,6 +191,28 @@
                 $("#lesPompiers .zhAction").val(2);  
                 $("#lesPompiers #zhIdP").val(-1);
             }
-            
+            var couleur = ["rouge","vert","orange"];        
+            // Gestion des evenements
+            $(document).ready(function() {
+                $(".ztCodeV").mouseover(function() {
+                    $(this).addClass("survol");
+                });
+
+                $(".ztCodeV").mouseout(function() {
+                    $(this).removeClass("survol");
+                });
+
+                $(".ztCodeV").click(function() {
+                    <% if (codeStatut != 2) { %>
+                    v = $(this).val();
+                    nv = (v+1) % 3;
+
+                    $(this).addClass(couleur[nv]);    
+                    $(this).removeClass(couleur[v]);
+                    $(this).val(nv);
+                    <% } else { %> alert("de garde");
+                    <% } %>
+                });
+            });
         </script>
 </html>

@@ -27,7 +27,7 @@ header {
 }
 main {
     background-color: #EDEDED;
-    width: 80%;    
+    width: 90%;    
     margin:auto;
     border-radius: 5px;
 }
@@ -135,4 +135,49 @@ legend {
 }
 #taObs {
     height: 30px;
+}
+table {
+     border-collapse: collapse;  
+     margin-bottom: 3px;
+}
+td, th {
+    border: 1px solid brown;
+    width : 2%;    
+}
+thead {
+    background-color: #DDDDDD;  
+}
+.centrer {
+    text-align: center;
+}
+.rouge {
+    background-color: red;
+    color :red;
+}
+.vert {
+    background-color: green;
+    color: green;
+}
+.orange {
+    background-color: orange;
+    color: orange;
+}
+td input {
+    width:                  90%;  
+    border:                 3px solid;
+    border-color:           burlywood;
+}
+.survol {
+    border-color:           #FFF;    
+}
+.smallCel {
+    width: 15px;
+}
+.legende {
+    margin-right: 10px;
+    padding: 1px 5px;
+    color : white;
+}
+#lesGardes {
+  width:100%;
 }
